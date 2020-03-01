@@ -1,0 +1,44 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>New Order</title>
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" />
+		<link rel="stylesheet" href="/../public/css/style.css">
+	</head>
+	
+	<body>
+        <h1><span class="yellow">New Order</span></h1>
+
+		<div class="container wrapper animated bounceInLeft">
+	
+			<form id="newOrder" method ="POST"action="<%=customerId%>"autocomplete="off">
+					<p><label>ITEM NAME*:	</label>	<select name="name"id="name" required >
+						<option value="CHAKKI">CHAKKI</option>
+						<option value="KAJU KATLI"selected>KAJU KATLI</option>
+						<option value="KAJU ROLL">KAJU ROLL</option>
+						<option value="LADDU">LADDU</option>
+						<option value="MAVA PEDA">MAVA PEDA</option>
+						<option value="NAMKEEN">NAMKEEN</option>
+					</select></p>
+					<p><label>PRICE : Rs/KG 	</label>	<input type="number"  name="pricePerKg"    required></p>
+					<p><label>BOX SIZE</label><select name="quantityOfEachBox"id="quantityOfEachBox"><br>
+						<option value="200">200 Grams</option>
+						<option value="250">250 Grams</option>
+						<option value="400">400 Grams</option>
+						<option value="500" selected>500 Grams</option>
+						<option value="1000">1 KG</option>
+						<option value="2000">2 KG</option>
+					</select></p>
+					<p><label>BOXES 	</label>	<input type="number"  name="NumberOfBox"    required></p>
+					<p><label>DESCRIPTION </label>	<input type="text"  name="Description" ></p>
+					<center><p><button type="submit" class="button">Submit</button></p></center>
+			</form>
+			<form id="cancel" method="GET"action="/customers/<%=customerId%>">
+				<center><p><button type="submit" class="button cancel">Cancel</button></p></center>
+			</form>
+		</div>
+	</body>
+</html>

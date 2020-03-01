@@ -1,0 +1,148 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Orders</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+  </head>
+  <body>
+    
+    <h1 class="black"onclick="openForm('name')"><%= Odata[1]%></h1>
+    <h1><span class="yellow"onclick="openForm('phone')"><%= Odata[6] %></span>;
+      <span class="yellow"onclick="openForm('address')"><%= Odata[2] %> </span></h1>
+    
+    <form id="newOrder" method ="GET"action="/orders/<%= Odata[0] %>"enctype="multipart/form-data">
+      <center><p><button type="submit" class="button">--- NEW ORDER ---</button></p></center>
+    </form>
+    
+    <table class="container">
+      <thead>
+        <tr role="row">
+          <th role="columnheader">Order Delivered?</th>
+          <th role="columnheader">Total Amount</th>
+          <th role="columnheader">Amount Paid</th>
+          <th role="columnheader">Balance Amount</th>
+        </tr>
+      </thead>
+      <tbody role="rowgroup">
+          <tr role="row">
+              <td role="cell"onclick="openForm('Delivery')"><%= Odata[3] %></td>
+              <td role="cell"><%= Odata[4] %></td>
+              <td role="cell"onclick="openForm('AmountPaid')"><%= Odata[5] %></td>
+              <td role="cell"><%= Odata[4] - Odata[5] %></td>
+          </tr>
+      </tbody>
+      
+    </table>
+    <form id="cancel" method="GET"action='/customers'>
+      <center><p><button type="submit" class="button cancel">Go Back</button></p></center>
+    </form>
+    <table class="container"id="allOrders">
+      <thead>
+        <tr role="row">
+          <th role="columnheader">Name</th>
+          <th role="columnheader">Total Weight</th>
+          <th role="columnheader">Total Amount</th>
+          <th role="columnheader">Box Size</th>
+          <th role="columnheader">No. of Box</th>
+          <th role="columnheader">Price: Rs/Kg</th>
+          <th role="columnheader">Description</th>
+          <th role="columnheader">Delete Item</th>
+        </tr>
+      </thead>
+      <tbody role="rowgroup">
+          <% var count=0;
+            Pdata.forEach(function(data){ 
+            count += 1;
+            %>
+            <tr role="row">
+              <td role="cell"><%= data[1] %></td>
+              <td role="cell"><%= data[4]*data[5]/1000 %> KG</td>
+              <td role="cell">Rs. <%= data[3]*data[4]*data[5]/1000 %></td>
+              <td role="cell"><%= data[4]%> grams</td>
+              <td role="cell"><%= data[5] %> BOX</td>
+              <td role="cell"><%= data[3] %></td>
+              <td role="cell"><%= data[6] %></td>
+              <td>
+                <form id="deleteOrder" method ="POST"action="/orders/delete/<%= data[0] %>?userId=<%=Odata[0]%>&price=<%= data[3]*data[4]*data[5]/1000 %>">
+                  <center><p><button type="submit">DELETE</button></p></center>
+                </form>
+              </td>
+            </tr>
+          <% }); %>
+      </tbody>
+    </table>
+  </body>
+
+  <script>
+    function openForm(formName) {
+      document.getElementById(formName).style.display = "block";
+    }
+    
+    function closeForm(formName) {
+      document.getElementById(formName).style.display = "none";
+    }
+  </script>  
+
+  <div class="form-popup"id="AmountPaid">
+    <form action="/customers/<%= Odata[0] %>/EditAmountPaid" method="POST"autofocus>
+      <center>
+        <label class="none"><b>New Amount Paid</b></label><br>
+        <input name="amountPaid"class="form-popup-input"type="number" required>
+        <p><button type="submit" class="btn">Submit</button></p>
+        <p><button type="button" class="btn cancel" onclick="closeForm('AmountPaid')">Close</button></p>
+      </center>
+    </form>
+  </div>
+
+  
+  <div class="form-popup"id="name">
+    <form action="/customers/<%= Odata[0] %>/name" method="POST"autofocus>
+      <center>
+        <label class="none"><b>New Name</b></label><br>
+        <input name="name"class="form-popup-input"required>
+        <p><button type="submit" class="btn">Submit</button></p>
+        <p><button type="button" class="btn cancel" onclick="closeForm('name')">Close</button></p>
+      </center>
+    </form>
+  </div>
+  
+  <div class="form-popup"id="address">
+    <form action="/customers/<%= Odata[0] %>/address" method="POST"autofocus>
+      <center>
+        <label class="none"><b>New Address</b></label><br>
+        <input name="address"class="form-popup-input" required>
+        <p><button type="submit" class="btn">Submit</button></p>
+        <p><button type="button" class="btn cancel" onclick="closeForm('address')">Close</button></p>
+      </center>
+    </form>
+  </div>
+  
+  <div class="form-popup"id="phone">
+    <form action="/customers/<%= Odata[0] %>/phone" method="POST"autofocus>
+      <center>
+        <label class="none"><b>New Number</b></label><br>
+        <input type="tel" name="phone"class="form-popup-input" required>
+        <p><button type="submit" class="btn">Submit</button></p>
+        <p><button type="button" class="btn cancel" onclick="closeForm('phone')">Close</button></p>
+      </center>
+    </form>
+  </div>
+
+  <div class="form-popup"id="Delivery">
+    <form action="/customers/<%= Odata[0] %>/orderDelivered" method="POST"autofocus>
+      <center>
+        <label class="none"><b>Delivered?</b></label><br>
+        <select name="orderDelivered"id="customerDelivered"class="form-popup-input">
+          <option value="No">No</option>
+          <option value="Yes">Yes</option>
+        </select>
+        <p><button type="submit" class="btn">Submit</button></p>
+        <p><button type="button" class="btn cancel" onclick="closeForm('Delivery')">Close</button></p>
+      </center>
+    </form>
+  </div>
+
+
+</html>
