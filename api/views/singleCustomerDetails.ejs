@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../public/css/style.css">
   </head>
   <body>
-    
     <h1 class="black"onclick="openForm('name')"><%= Odata[1]%></h1>
     <h1><span class="yellow"onclick="openForm('phone')"><%= Odata[6] %></span>;
       <span class="yellow"onclick="openForm('address')"><%= Odata[2] %> </span></h1>
@@ -33,11 +32,12 @@
               <td role="cell"><%= Odata[4] - Odata[5] %></td>
           </tr>
       </tbody>
-      
     </table>
+
     <form id="cancel" method="GET"action='/customers'>
       <center><p><button type="submit" class="button cancel">Go Back</button></p></center>
     </form>
+    
     <table class="container"id="allOrders">
       <thead>
         <tr role="row">

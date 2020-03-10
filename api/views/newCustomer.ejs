@@ -10,20 +10,21 @@
 	</head>
 	
 	<body>
-        <h1><span class="blue"></span>New<span class="blue"></span> <span class="yellow">Customer</pan></h1>
+        <h1><span class="yellow">New Customer</span></h1>
 
 		<div class="container wrapper animated bounceInLeft">
 			<form id="newCustomer" method ="POST"action="newcustomer"autocomplete="off">
 				<p><label>NAME*:	</label>	<input type="text"  name="name"   required ></p>
 				<p><label>ADDRESS*:</label><input type="text"  name="address"  required></p>
 				<p><label>PHONE*:</label><input type="tel"  name="phone"  required></p>
-				<p><label>AMOUNT PAID*:    	</label>	<input type="number"  name="amountPaid"required></p>
+				<p><label>AMOUNT PAID*:    	</label>	<input type="number"  name="amountPaid"value = "0"equired></p>
 				<p><label>ORDER DELIVERED</label><select name="orderDelivered"id="orderDelivered"      class="form-control"><br>
 					<option value="NO">NO</option>
 					<option value="YES">YES</option>
 				</select></p>
 				<center><p><button type="submit" class="button">Submit</button></p></center>
 			</form>
+		
 			<form id="cancel" method="GET"action='/customers'>
 				<center><p><button type="submit" class="button cancel">Cancel</button></p></center>
 			</form>

@@ -34,33 +34,30 @@
         <% var count=0;
           data.forEach(function(dataitem){ 
           count += 1;
-        %>
-        <%
+    
           if(count%2){ %>
             <tr role="row" class="wrapper animated bounceInLeft">
-          <%} else {%>
+          <% } else { %>
             <tr role="row" class="wrapper animated bounceInRight">
-          <%}
-        %>
+          <% } %>
+              <td role="cell"><%= count %></td>
+              <td role="cell"><a method="GET"href="/customers/<%= dataitem[0] %>"><%= dataitem[1] %></a></td>
+              <td role="cell"><%= dataitem[2] %></td>
+              <td role="cell"><%= dataitem[3] %></td>
+              <td role="cell"><%= dataitem[4] %></td>
+              <td role="cell"><%= dataitem[5] %></td>
+              <td role="cell"><%= dataitem[4] - dataitem[5] %></td>
+              <td>
+                <form id="deleteCustomer" method ="POST"action="/customers/delete/<%= dataitem[0] %>">
+                  <center><p><button type="submit">DELETE</button></p></center>
+                </form>
+              </td>
+            </tr>
           
-            <td role="cell"><%= count %></td>
-            <td role="cell"><a method="GET"href="/customers/<%= dataitem[0] %>"><%= dataitem[1] %></a></td>
-            <td role="cell"><%= dataitem[2] %></td>
-            <td role="cell"><%= dataitem[3] %></td>
-            <td role="cell"><%= dataitem[4] %></td>
-            <td role="cell"><%= dataitem[5] %></td>
-            <td role="cell"><%= dataitem[4] - dataitem[5] %></td>
-            <td>
-              <form id="deleteCustomer" method ="POST"action="/customers/delete/<%= dataitem[0] %>">
-                <center><p><button type="submit">DELETE</button></p></center>
-              </form>
-            </td>
-          </tr>
-          
-        <% }); 
-        %>
+        <% }); %>
       </tbody>
     </table>
+    
     <form id="cancel" method="GET"action='/customers/details'>
       <center><p><button type="submit" class="button">Get All Details</button></p></center>
     </form>
